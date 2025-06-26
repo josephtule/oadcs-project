@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "name": "Mac",
+      "includePath": [
+        "${workspaceFolder}/external/eigen",
+        "${workspaceFolder}",
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/clang++",
+      "cStandard": "c11",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "macos-clang-arm64",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+    },
+    {
+      "name": "Windows",
+      "includePath": [
+        "${workspaceFolder}/external/eigen",
+        "${workspaceFolder}",
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src"
+      ],
+      "defines": [],
+      "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/Llvm/bin/clang++.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++23",
+      "intelliSenseMode": "windows-clang-x86",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+    }
+  ],
+
+  "version": 4
+}
