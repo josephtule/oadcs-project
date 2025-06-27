@@ -32,10 +32,17 @@ file(GLOB_RECURSE SOURCES
     # astrolib/src/*.cpp
 )
 
+if (MSVC)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Z7 /Ob0 /Od /RTC1")
+endif()
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fno-inline")
+endif()
+
 # Add executable
 add_executable(oadcs_project ${SOURCES})
 
 # Link raylib
-add_subdirectory(${RAYLIB_DIR} EXCLUDE_FROM_ALL)
+# add_subdirectory(${RAYLIB_DIR} EXCLUDE_FROM_ALL)
 # target_link_libraries(oadcs_project raylib)
 target_link_libraries(oadcs_project)
