@@ -2,7 +2,7 @@
 
 #include "body.h"
 
-struct Satellite : Body {
+struct Satellite : public Body {
 
     // methods
 

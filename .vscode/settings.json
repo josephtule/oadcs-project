@@ -1,8 +1,12 @@
 {
   "cSpell.words": [
     "Crassidis",
+    "depdt",
+    "dhdt",
+    "domegadt",
     "ECEF",
     "Eigen",
+    "qdotq",
     "rodrigues",
     "Vallado",
     "vecx"

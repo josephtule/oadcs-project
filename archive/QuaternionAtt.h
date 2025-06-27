@@ -5,7 +5,7 @@
 
 struct QuaternionAtt : public Attitude {
 
-    vec4 quat; // [x,y,z,w]
+    vec4 quat;  // [x,y,z,w]
     vec3 omega; // angular velocity
 
     // identity quaternion/euler parameter
@@ -84,9 +84,7 @@ struct QuaternionAtt : public Attitude {
         return R;
     }
 
-    mat3 to_dcm() const override {
-        return quat_to_dcm(quat);
-    }
+    mat3 to_dcm() const override { return quat_to_dcm(quat); }
     void from_dcm(const mat3 &R) override { quat = dcm_to_quat(R); }
 
     std::string to_string() const override {

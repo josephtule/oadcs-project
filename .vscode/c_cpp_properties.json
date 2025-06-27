@@ -9,7 +9,7 @@
         "${workspaceFolder}/src"
       ],
       "defines": [],
-      "compilerPath": "/usr/bin/clang++",
+      "compilerPath": "/opt/homebrew/opt/llvm/bin/clang++",
       "cStandard": "c11",
       "cppStandard": "c++23",
       "intelliSenseMode": "macos-clang-arm64",
