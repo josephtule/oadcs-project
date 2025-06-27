@@ -6,6 +6,7 @@
 struct QuaternionAtt : public Attitude {
 
     vec4 quat; // [x,y,z,w]
+    vec3 omega; // angular velocity
 
     // identity quaternion/euler parameter
     QuaternionAtt() : quat(vec4(0, 0, 0, 1)) {}

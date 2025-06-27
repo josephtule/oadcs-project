@@ -1,5 +1,8 @@
 # oadcs-project
 
+## TODO:
+- [ ] redo attitude representations (currently too complicated)
+
 ## References
 - David A. Vallado. Fundamentals of Astrodynamics and Applications. 5e. Microcosm Press, 2022.
 - Bong Wie. Space Vehicle Guidance, Control, and Astrodynamics. AIAA
