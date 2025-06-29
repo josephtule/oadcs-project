@@ -128,12 +128,13 @@ inline vec4 ep_kde(vec4 &ep, vec3 &omega) {
 
     return depdt;
 }
-inline vec3 omega_ode(vec3 omega, vec3 torque, mat3 I, mat3 I_inv) {
+inline vec3
+omega_ode(vec3 omega, vec3 torque, mat3 I, mat3 I_inv, bool I_diag = true) {
     vec3 domegadt;
     f64 w1 = omega(0);
     f64 w2 = omega(1);
     f64 w3 = omega(2);
-    if (I.isDiagonal()) {
+    if (I_diag) {
         domegadt = vec3(
             (I(1, 1) - I(2, 2)) / I(0, 0) * w2 * w3,
             (I(2, 2) - I(0, 0)) / I(1, 1) * w1 * w3,

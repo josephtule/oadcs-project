@@ -6,10 +6,15 @@
     "domegadt",
     "ECEF",
     "Eigen",
+    "Heun",
+    "Kutta",
     "qdotq",
+    "Ralston",
     "rodrigues",
+    "Runge",
     "Vallado",
-    "vecx"
+    "vecx",
+    "xnew"
   ]
   // "files.associations": {
   //   "ostream": "cpp"
