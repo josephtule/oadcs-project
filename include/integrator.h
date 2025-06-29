@@ -14,8 +14,8 @@ const f64 DT_DEFAULT = 1e-3;
 
 // Fixed Step Size
 template <
-    typename State,
     typename F,
+    typename State,
     template <typename, typename> class Policy>
 struct FixedStepIntegrator {
     // Members
@@ -52,6 +52,8 @@ struct FixedStepIntegrator {
         while (t < tf) {
             double dt = std::min(dt0_, tf - t);
             auto [t_new, x_new] = Policy<F, State>::step(f_, t, x, dt);
+            t = t_new;
+            x = x_new;
             times.push_back(t_new);
             states.push_back(x_new);
         }
@@ -97,7 +99,7 @@ struct AdaptiveStepIntegrator {
             State x_trial;
             f64 dt_new, err;
 
-            // Search for new dt 
+            // Search for new dt
             while (true) {
                 std::tie(dt_new, x_trial, err)
                     = Policy<F, State>::step(f_, t, x, dt, tol_);

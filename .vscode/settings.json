@@ -1,20 +1,31 @@
 {
   "cSpell.words": [
+    "aspectmode",
+    "colorscale",
     "Crassidis",
     "depdt",
     "dhdt",
     "domegadt",
+    "dxdt",
     "ECEF",
     "Eigen",
     "Heun",
     "Kutta",
+    "loadtxt",
+    "meshgrid",
+    "pointmass",
     "qdotq",
     "Ralston",
     "rodrigues",
     "Runge",
+    "showscale",
+    "skiprows",
     "Vallado",
     "vecx",
-    "xnew"
+    "xaxis",
+    "xnew",
+    "yaxis",
+    "zaxis"
   ]
   // "files.associations": {
   //   "ostream": "cpp"

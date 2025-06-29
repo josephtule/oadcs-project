@@ -216,20 +216,15 @@ inline mat3 pr_to_dcm(
     f64 e2 = axis(1);
     f64 e3 = axis(2);
 
-    mat3 R = mat3(
+    mat3 R;
+    R <<
         // row 1
         e1 * e1 * sigma + c,
-        e1 * e2 * sigma + e3 * s,
-        e1 * e3 * sigma - e2 * s,
+        e1 * e2 * sigma + e3 * s, e1 * e3 * sigma - e2 * s,
         // row 2
-        e2 * e1 * sigma - e3 * s,
-        e2 * e2 * sigma + c,
-        e2 * e3 * sigma + e1 * s,
+        e2 * e1 * sigma - e3 * s, e2 * e2 * sigma + c, e2 * e3 * sigma + e1 * s,
         // row 3
-        e3 * e1 * sigma + e2 * s,
-        e3 * e2 * sigma - e1 * s,
-        e3 * e3 * sigma + c
-    );
+        e3 * e1 * sigma + e2 * s, e3 * e2 * sigma - e1 * s, e3 * e3 * sigma + c;
     return R;
 }
 inline vec4 pr_to_ep(
@@ -250,21 +245,16 @@ inline mat3 crp_to_dcm(const vec3 &crp) {
     f64 q2s = q2 * q2;
     f64 q3s = q3 * q3;
     f64 qdotq = crp.dot(crp);
-    mat3 R = 1 / (1 + qdotq)
-             * mat3(
-                 // row 1
-                 1 + q1s - q2s - q3s,
-                 2 * (q1 * q2 + q3),
-                 2 * (q1 * q3 - q2),
-                 // row 2
-                 2 * (q2 * q1 - q3),
-                 1 - q1s + q2s - q3s,
-                 2 * (q2 * q3 + q1),
-                 // row 3
-                 2 * (q3 * q1 + q2),
-                 2 * (q3 * q2 - q1),
-                 1 - q1s - q2s + q3s
-             );
+    mat3 R;
+    R <<
+        // row 1
+        1 + q1s - q2s - q3s,
+        2 * (q1 * q2 + q3), 2 * (q1 * q3 - q2),
+        // row 2
+        2 * (q2 * q1 - q3), 1 - q1s + q2s - q3s, 2 * (q2 * q3 + q1),
+        // row 3
+        2 * (q3 * q1 + q2), 2 * (q3 * q2 - q1), 1 - q1s - q2s + q3s;
+    R = R * 1 / (1 + qdotq);
 
     return R;
 }
@@ -284,21 +274,18 @@ inline mat3 mrp_to_dcm(const vec3 &mrp) {
     f64 sdots = mrp.dot(mrp);
     f64 denom = (1 + sdots) * (1 + sdots);
     f64 oms2 = 1 - sdots;
-    mat3 R = 1 / denom
-             * mat3(
-                 // row 1
-                 4 * (s1s - s2s - s3s) + oms2 * oms2,
-                 8 * s1 * s2 + 4 * s3 * oms2,
-                 8 * s1 * s3 - 4 * s2 * oms2,
-                 // row 2
-                 8 * s2 * s1 - 4 * s3 * oms2,
-                 4 * (-s1s + s2s - s3s) + oms2 * oms2,
-                 8 * s2 * s3 + 4 * s1 * oms2,
-                 // row 3
-                 8 * s3 * s1 + 4 * s2 * oms2,
-                 8 * s3 * s2 - 4 * s1 * oms2,
-                 4 * (-s1s - s2s + s3s) + oms2 * oms2
-             );
+    mat3 R;
+    R <<
+        // row 1
+        4 * (s1s - s2s - s3s) + oms2 * oms2,
+        8 * s1 * s2 + 4 * s3 * oms2, 8 * s1 * s3 - 4 * s2 * oms2,
+        // row 2
+        8 * s2 * s1 - 4 * s3 * oms2, 4 * (-s1s + s2s - s3s) + oms2 * oms2,
+        8 * s2 * s3 + 4 * s1 * oms2,
+        // row 3
+        8 * s3 * s1 + 4 * s2 * oms2, 8 * s3 * s2 - 4 * s1 * oms2,
+        4 * (-s1s - s2s + s3s) + oms2 * oms2;
+    R = R / denom;
     return R;
 }
 inline vec4 mrp_to_ep(const vec3 &mrp) {
