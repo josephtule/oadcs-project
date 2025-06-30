@@ -1,7 +1,8 @@
+#include <chrono>
 #include <cmath>
+#include <fstream>
 #include <iostream>
 #include <vector>
-#include <fstream>
 
 #include "FixedIntegrators.h"
 #include "integrator.h"
@@ -12,18 +13,7 @@ int main() {
     // Gravitational parameter for Earth (km^3/s^2)
     const f64 mu = 398600.4418;
 
-    // Define the two-body ODE: state x = [r; v]
-    // auto f = [mu](f64 t, const vec6 &x) {
-    //     vec3 r = x.segment<3>(0);
-    //     vec3 v = x.segment<3>(3);
-    //     f64 r_norm = r.norm();
-
-    //     vec3 a = -mu / (r_norm * r_norm * r_norm) * r;
-    //     vec6 dx;
-    //     dx.segment<3>(0) = v;
-    //     dx.segment<3>(3) = a;
-    //     return dx;
-    // };
+    // lambda for 
     auto f = [mu](f64 t, const vec6 &x) {
         vec6 dxdt = gravity_newton(t, x, mu);
         return dxdt;
@@ -54,10 +44,14 @@ int main() {
     int Nsteps = 1000;
 
     // Test RK4 fixed-step integrator
-    FixedStepIntegrator<decltype(f), vec6, RK4Policy> rk4(f, 0.1);
+    FixedStepIntegrator<decltype(f), vec6, RK4Policy> rk4(f, 0.001);
     std::vector<f64> times;
     std::vector<vec6> states;
+    auto t_start = std::chrono::high_resolution_clock::now();
     rk4.integrate(t0, tf, x0, times, states);
+    auto t_end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = t_end - t_start;
+    std::cout << "Total runtime: " << elapsed.count() << " seconds\n";
 
     // Final state
     vec6 xf = states.back();
@@ -69,7 +63,7 @@ int main() {
     std::cout << "Final velocity (km/s): " << vf.transpose() << std::endl;
     std::cout << "Radius error (km): " << (rf.norm() - r0.norm()) << std::endl;
 
-    // std::cout << times.size() << std::endl;
+    std::cout << times.size() << std::endl;
     // for (int i = 0; i < times.size(); i++) {
     //     vec3 r_curr = states[i].segment(0, 3);
     //     std::cout << "Time (s): " << times[i]
@@ -77,16 +71,16 @@ int main() {
     // }
 
     // Export time & positions
-    std::ofstream ofs("orbit.csv");
-    ofs << "t_km,x_km,y_km,z_km\n";
-    for (int i = 0; i < times.size(); ++i) {
-        const auto &x6 = states[i];
-        f64 t = times[i];
-        f64 x = x6(0), y = x6(1), z = x6(2);
-        ofs << t << "," << x << "," << y << "," << z << "\n";
-    }
-    ofs.close();
-    std::cout << "Wrote orbit.csv (" << times.size() << " lines)\n";
+    // std::ofstream ofs("orbit.csv");
+    // ofs << "t_km,x_km,y_km,z_km\n";
+    // for (int i = 0; i < times.size(); ++i) {
+    //     const auto &x6 = states[i];
+    //     f64 t = times[i];
+    //     f64 x = x6(0), y = x6(1), z = x6(2);
+    //     ofs << t << "," << x << "," << y << "," << z << "\n";
+    // }
+    // ofs.close();
+    // std::cout << "Wrote orbit.csv (" << times.size() << " lines)\n";
 
     return 0;
 }

@@ -37,3 +37,8 @@ external/ClayMan
 build/*
 .DS_Store
 .cache
+
+# EGM models
+assets/EGM2008.txt
+# assets/EGM84.txt
+# assets/EGM96.txt

@@ -3,7 +3,7 @@
   "configurations": [
     // macOS/Linux
     {
-      "name": "Debug (CMake-Mac)",
+      "name": "Debug mac",
       "type": "lldb",
       "request": "launch",
       "program": "${command:cmake.launchTargetPath}",
@@ -15,7 +15,7 @@
 
     // Windows
     {
-      "name": "Debug (CMakeWin)",
+      "name": "Debug win",
       "type": "lldb",
       "request": "launch",
       "program": "${command:cmake.launchTargetPath}",

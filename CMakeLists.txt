@@ -37,6 +37,8 @@ if (MSVC)
 endif()
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fno-inline")
+    set(CMAKE_CXX_FLAGS_RELEASE   "-O3 -march=native -flto")
+
 endif()
 
 # Add executable
