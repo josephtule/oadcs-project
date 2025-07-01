@@ -1,4 +1,4 @@
-#include "attitude.h"
+#include "Attitude.h"
 
 mat3 skew(vec3 v) {
     mat3 s;

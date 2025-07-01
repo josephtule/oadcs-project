@@ -1,7 +1,7 @@
 #pragma once
 
 #include "QuaternionAtt.h"
-#include "attitude.h"
+#include "Attitude.h"
 
 
 struct DirectionCosineAtt : public Attitude {

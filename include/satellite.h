@@ -1,6 +1,6 @@
 #pragma once
 
-#include "body.h"
+#include "Body.h"
 
 struct Satellite : public Body {
 

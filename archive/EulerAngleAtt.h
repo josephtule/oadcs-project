@@ -1,6 +1,6 @@
 #pragma once
 
-#include "attitude.h"
+#include "Attitude.h"
 #include "QuaternionAtt.h"
 
 struct EulerAngleAtt : public Attitude {

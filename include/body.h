@@ -2,7 +2,6 @@
 
 #include <string>
 
-#include "translational.h"
 #include "typedefs.h"
 #include "units.h"
 
@@ -21,7 +20,7 @@ struct Body {
     UnitsMass u_mass = UnitsMass::KILOGRAMS;
 
     // gravity model
-    GravityModel gravity_model = GravityModel::none;
+    // GravityModel gravity_model = GravityModel::none;
 
     // flags
     bool update_position = true;

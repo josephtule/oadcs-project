@@ -1,6 +1,12 @@
-#include "typedefs.h"
+
+#include <fstream>
+#include <iostream>
+#include <string>
 #include <tuple>
 #include <vector>
+
+#include "CelestialBody.h"
+#include "typedefs.h"
 
 template <typename State, typename ForcePolicy> struct EOM {
     ForcePolicy forces;
@@ -66,7 +72,7 @@ template <typename State> struct ZonalGravityPolicy {
         NewtonianGravityPolicy<vec6> newton(mu);
         vec3 a = newton.acceleration(x);
 
-        // Add Zonal Gravity Perturbations
+        // Add Zonal Gravity Perturbations (only J2 for now)
         vec3 r = x.template segment<3>(0);
         f64 J2 = J[1];
         f64 r_mag = r.norm();
@@ -90,34 +96,6 @@ template <typename State> struct ZonalGravityPolicy {
         return a;
     }
 };
-struct EGMCoefficients {
-    int max_degree, max_order; // max_degree = N, max_order = M
-    std::vector<f64> C;
-    std::vector<f64> S;
-
-    // Instantiate and fill with zeros
-    EGMCoefficients(int N, int M)
-        : max_degree(N), max_order(M), C((N + 1) * (M + 1), 0.),
-          S((N + 1) * (M + 1), 0.) {};
-
-    void load_egm(std::string filename, int year) {
-        switch (year) {
-        case 1984: {
-        }
-        case 1996: {
-        }
-        case 2008: {
-        }
-        default:
-        }
-    };
-
-    inline int idx(int n, int m) const { return n * (max_order + 1) + m; }
-    double getC(int n, int m) const { return C[idx(n, m)]; }
-    double getS(int n, int m) const { return S[idx(n, m)]; }
-    void setC(int n, int m, double v) { C[idx(n, m)] = v; }
-    void setS(int n, int m, double v) { S[idx(n, m)] = v; }
-};
 
 template <typename State> struct SphericalHarmonicGravityPolicy {
     f64 mu;
@@ -126,9 +104,7 @@ template <typename State> struct SphericalHarmonicGravityPolicy {
     int max_degree, max_order;
 
     explicit SphericalHarmonicGravityPolicy(
-        f64 mu,
-        f64 R_cb,
-        EGMCoefficients &egm
+        
     )
         : mu(mu), R_cb(R_cb), max_degree(egm.max_degree),
           max_order(egm.max_order), egm(egm) {}

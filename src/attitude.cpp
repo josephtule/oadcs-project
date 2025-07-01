@@ -1,4 +1,4 @@
-#include "attitude.h"
+#include "Attitude.h"
 #include "typedefs.h"
 #include "units.h"
 
